@@ -1,7 +1,5 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
-  
-  # only: [:content]
 
   # GET
 
@@ -71,9 +69,5 @@ class ApplicationController < Sinatra::Base
     post.destroy
     post.to_json
   end
-
-  # post '/replies' do
-  #   reply = Reply.create()
-  # end
 
 end
