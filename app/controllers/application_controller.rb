@@ -56,6 +56,14 @@ class ApplicationController < Sinatra::Base
     ).to_json
   end
 
+  post '/replies' do 
+    Reply.create(
+      user_id: params[:user_id],
+      post_id: params[:post_id],
+      content: params[:content]
+    ).to_json
+  end
+
   # DELETE
 
   delete '/posts/:id' do
