@@ -1,18 +1,28 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-  # Add your routes here
-  # get "/" do
-  #   { message: "Good luck with your project!" }.to_json
-  # end
+  # only: [:content]
+
+  # GET
 
   get "/posts" do
-    Post.all.to_json(include: [:likes, :replies])
+    #get all posts, starting with the most recent
+    Post.all.order('created_at DESC').to_json(include: {user: {only: [:username]}, community: {only: [:name]}, replies: {include:[user: {only: [:username]}]}, likes: {only: [:post_id, :user_id]}})
   end
 
-  get "/posts/:id" do
+  get "/posts/top" do
+    #get all posts, starting with the most recent
+    Post.all.order('created_at ASC').to_json(include: {user: {only: [:username]}, community: {only: [:name]}, replies: {include:[user: {only: [:username]}]}, likes: {only: [:post_id, :user_id]}})
+  end
+
+  get '/posts/:id' do
     post = Post.find(params[:id])
     post.to_json(include: [:likes, :replies])
+  end
+
+  get '/posts/:id/likecount' do
+    post_likes = Post.find(params[:id]).like_count
+    post_likes.to_json
   end
 
   get "/users" do
@@ -24,8 +34,38 @@ class ApplicationController < Sinatra::Base
     user.to_json
   end
 
+  get "/communities" do
+    Community.all.to_json
+  end
 
-  # might need one about likes
+  # POST
 
+  post '/posts' do
+    Post.create(
+      headline: params[:headline], 
+      content: params[:content], 
+      image_url: params[:image_url], 
+      user_id: params[:user_id], 
+      community_id: params[:community_id]).to_json(include: {user: {only: [:username]}, community: {only: [:name]}, replies: {include:[user: {only: [:username]}]}, likes: {only: [:post_id, :user_id]}})
+  end
+
+  post '/likes' do
+    Like.create(
+      user_id: params[:user_id],
+      post_id: params[:post_id]
+    ).to_json
+  end
+
+  # DELETE
+
+  delete '/posts/:id' do
+    post = Post.find(params[:id])
+    post.destroy
+    post.to_json
+  end
+
+  # post '/replies' do
+  #   reply = Reply.create()
+  # end
 
 end
