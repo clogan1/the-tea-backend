@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_233902) do
+ActiveRecord::Schema.define(version: 2021_08_25_001334) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
+    t.string "emoji"
   end
 
   create_table "likes", force: :cascade do |t|
