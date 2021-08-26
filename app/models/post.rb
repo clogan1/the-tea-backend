@@ -7,4 +7,8 @@ class Post < ActiveRecord::Base
     def like_count
         self.likes.count
     end
+
+    def self.by_community(id)
+        self.where("community_id = ?", id)
+    end
 end

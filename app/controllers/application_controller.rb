@@ -8,6 +8,16 @@ class ApplicationController < Sinatra::Base
     Post.all.order('created_at DESC').to_json(include: {user: {only: [:username, :avatar]}, community: {only: [:name, :emoji]}, replies: {include:[user: {only: [:username, :avatar]}]}, likes: {only: [:post_id, :user_id]}})
   end
 
+  get "/posts/:limit/:offset" do
+    #get all posts, starting with the most recent
+    Post.all.limit(params[:limit]).offset(params[:offset]).order('created_at DESC').to_json(include: {user: {only: [:username, :avatar]}, community: {only: [:name, :emoji]}, replies: {include:[user: {only: [:username, :avatar]}]}, likes: {only: [:post_id, :user_id]}})
+  end
+
+  get "/posts/:limit/:offset/:community" do
+    #get all posts, starting with the most recent
+    Post.by_community(params[:community]).limit(params[:limit]).offset(params[:offset]).order('created_at DESC').to_json(include: {user: {only: [:username, :avatar]}, community: {only: [:name, :emoji]}, replies: {include:[user: {only: [:username, :avatar]}]}, likes: {only: [:post_id, :user_id]}})
+  end
+
   # get "/posts/top" do
   #   #get all posts, starting with the most recent
   #   Post.all.order('created_at ASC').to_json(include: {user: {only: [:username, :avatar]}, community: {only: [:name]}, replies: {include:[user: {only: [:username, :avatar]}]}, likes: {only: [:post_id, :user_id]}})
