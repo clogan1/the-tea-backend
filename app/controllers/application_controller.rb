@@ -34,6 +34,11 @@ class ApplicationController < Sinatra::Base
     user.to_json
   end
 
+  # get '/users/:username' do
+  #   user = User.find_by!(params[:username])
+  #   user.to_json
+  # end
+
   get "/communities" do
     Community.all.to_json
   end
