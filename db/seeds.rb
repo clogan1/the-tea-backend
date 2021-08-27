@@ -34,13 +34,20 @@ puts "🌱 Seeding spices..."
 # bach_shows = ["The Bachelor", "The Bachelorette", "Bachelor in Paradise"]
 # bach_images = ['', 'https://static.parade.com/wp-content/uploads/2021/08/the-bachelor-season-26.jpg', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F684xflex%2Fpublic%2Fimages%2F2016%2F04%2F042616-bachelorette-jojo-promo.jpg%3Fitok%3DwUvtmBX4', 'https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/P7YEU4BUDNG73NB575PBL4KHAQ.jpg']
 
+# love_is_shows = ["Love Island UK", "Love Island US"]
+# lov_is_pics = ["https://upload.wikimedia.org/wikipedia/en/4/4a/Love_Island_UK.jpg", "https://cdn.mos.cms.futurecdn.net/NnWdgeyS5hunyKN4LGzryg.jpg", "https://metro.co.uk/wp-content/uploads/2020/01/PRI_117660705.jpg?quality=90&strip=all"]
+
+# fiance_shows = ["90 Day Fiancé", "90 Day Fiancé: Happily Ever After", "90 Day Fiancé: The Other Way", "90 Day Fiancé: Just Landed" ]
+
+# fiance_pics = ["https://i.imgflip.com/44odzh.png", "", "https://www.tvinsider.com/wp-content/uploads/2019/10/90-Day-Fiance-1014x570.jpg", "", "", ""]
+
 # 10.times do 
 #     Post.create(
 #     user_id: User.all.ids.sample,
-#     community_id: 3, 
-#     headline: bravo_shows.sample,
+#     community_id: 4, 
+#     headline: fiance_shows.sample,
 #     content: Faker::Lorem.sentence(word_count: 15),
-#     image_url: bravo_images.sample
+#     image_url: fiance_pics.sample
 # )
 # end
 
@@ -54,6 +61,14 @@ puts "🌱 Seeding spices..."
 
 # puts "Creating Replies"
 
+# 50.times do 
+#     Reply.create(
+#         user_id: User.all.ids.sample,
+#         post_id: Post.all.ids.sample,
+#         content: Faker::Lorem.sentence(word_count: 15)
+#     )
+# end
+
 # reply1 = Reply.create(user_id: sam.id, post_id: post1.id, content: "Honestly might have been a top 10 ALL time housewives moment for me. She read them like I've never seen before.")
 # reply2 = Reply.create(user_id: claire.id, post_id: post1.id, content: "I know right? A hall-of-fame moment.")
 # reply3 = Reply.create(user_id: sam.id, post_id: post3.id, content: "Yeah, she doesn't really seem ready for a serious relationship...but only time will tell!")
@@ -63,6 +78,8 @@ puts "🌱 Seeding spices..."
 
 
 # puts "Replies Created"
+
+
 
 # puts "Creating Likes"
 # # like1 = Like.create(user_id: sam.id, post_id: post1.id)
@@ -76,5 +93,15 @@ puts "🌱 Seeding spices..."
 #         post_id: Post.all.ids.sample)
 # end
 # puts "Likes Created "
+
+# User.all.each do |user|
+#     20.times do 
+#         Like.create(
+#             user_id: user.id, 
+#             post_id: 
+#         )
+#     end
+# end
+
 
 puts "✅ Done seeding!"
